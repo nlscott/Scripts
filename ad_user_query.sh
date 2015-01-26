@@ -1,7 +1,7 @@
 #!/bin/sh
 #version 1.1
 
-<<<<<<< HEAD
+
 #variable
 domain_name="xxxx"
 
