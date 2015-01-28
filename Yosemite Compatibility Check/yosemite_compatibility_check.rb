@@ -6,6 +6,20 @@ board_id=`ioreg -l | grep "board-id" | cut -d \\" -f 4`.chop
 total_ram=`system_profiler SPHardwareDataType | grep Memory | awk '{print $2}'`.to_i
 free_space=`diskutil info // | grep "Free Space" | awk '{print $4}'`.to_i
 
+#define colored text
+class String
+	def red;		"\033[31m#{self}\033[0m" end
+	def green;		"\033[32m#{self}\033[0m" end
+	def brown;		"\033[33m#{self}\033[0m" end
+	def blue;		"\033[34m#{self}\033[0m" end
+	def magenta;	"\033[35m#{self}\033[0m" end
+	def cyan;		"\033[36m#{self}\033[0m" end
+	def gray;		"\033[37m#{self}\033[0m" end
+	def yellow;		"\033[93m#{self}\033[0m" end
+
+end
+
+#list of yosemite compatible Mac Models
 mac_models = {
 	"Mac-F4238CC8" => "iMac7,1",
 	"Mac-F42386C8" => "iMac7,1",
@@ -86,50 +100,55 @@ mac_models = {
 
 result = mac_models.has_key? (board_id)
 
+
 #check RAM
 if total_ram >= 2
-	puts "  RAM Installed = " + total_ram.to_s + "GB : PASS"
+	puts "  RAM Installed = ".cyan + total_ram.to_s.cyan + "GB : ".cyan + "PASS".green
 elsif total_ram < 2
-	puts "  RAM Installed = " + total_ram.to_s + "GB : FAIL"
+	puts "  RAM Installed = ".cyan + total_ram.to_s.cyan + "GB : ".cyan + "FAIL".red
 else
-	puts "  RAM Status = Error!"
-	puts "  The RAM could not be checked on this machine!"
+	puts "  RAM Status = Error!".yellow
+	puts "  The RAM could not be checked on this machine!".yellow
 end
 
 
 #check Free Space
 if free_space >= 8
-	puts "  Free HD Space = " + free_space.to_s + "GB : PASS"
+	puts "  Free HD Space = ".cyan + free_space.to_s.cyan + "GB : ".cyan + "PASS".green
 elsif free_space < 8
-	puts "  Free HD Space = " + free_space.to_s + "GB : FAIL"
+	puts "  Free HD Space = ".cyan + free_space.to_s.cyan + "GB : ".cyan + "FAIL".red
 else
-	puts "  Free HD Space = Error!"
-	puts "  THis machine does not have enough free space to install Yosemite!!"
+	puts "  Free HD Space = Error!".yellow
+	puts "  THis machine does not have enough free space to install Yosemite!!".yellow
 end
 
 
 #board id check
 if result == true
-	puts "  Model ID = " + mac_models[board_id] + " : PASS"
+	puts "  Model ID = ".cyan + mac_models[board_id].cyan + " : ".cyan + "PASS".green
 elsif result == false
-	puts "  Model ID = " + mac_models[board_id] + " : FAIL"
+	puts "  Model ID = ".cyan + mac_models[board_id].cyan + " : ".cyan + "FAIL".red
 else
-	puts "  Model ID = Error!"
-	puts "  The Model of this machine could not be checked"
+	puts "  Model ID = Error!".yellow
+	puts "  The Model of this machine could not be checked".yellow
 end
 
 
 #Yosemite compatible check
 if result == true and total_ram >= 2 and free_space >= 8
-	puts "\n  Yosemite Compatible: PASS"
-	puts "  This machine can be upgraded to Yosemite"
+	puts "  - - - - - - - - -".yellow
+	puts "  Yosemite Compatible: ".cyan + "PASS".green
+	puts "  This machine can be upgraded to Yosemite".green
+
 elsif result != true or total_ram < 2 or free_space < 8
-	puts "\n  Yosemite Compatible: FAIL"
-	puts "  This machine can not be upgraded to Yosemite"
+	puts "  - - - - - - - - -".yellow
+	puts "  Yosemite Compatible: ".cyan + "FAIL".red
+	puts "  This machine can not be upgraded to Yosemite".red
 
 else
-	puts "\n  Yosemite Compatible: ERROR"
-	puts "  The status of this machine could not be checked"
+	puts "  - - - - - - - - -".yellow
+	puts "  Yosemite Compatible: ERROR".yellow
+	puts "  The status of this machine could not be checked".yellow
 end
 
 
