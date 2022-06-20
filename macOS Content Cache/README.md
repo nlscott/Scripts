@@ -89,9 +89,9 @@ AssetCacheManagerUtil status -j &>/dev/null | jq '.result.TotalBytesStoredFromOr
 
 ## Visualizing macOS Content Cache Metrics
 
-I'll a big fan of Grafana and Influxdb, so it only makes sense for me to send these metrics to Influxdb so I can build a dashboard with Grafana. What's nice about sending it to influxdb is you don't have to convert the bytes, that can be handled directly in Grafana while building the dashboard.
+I'm a big fan of Grafana and Influxdb, so it only makes sense for me to send these metrics to Influxdb so I can build a dashboard with Grafana. What's nice about sending it to influxdb is you don't have to convert the bytes, that can be handled directly in Grafana while building the dashboard.
 
-I use the `AssetCacheManagerUtil.rb` script, which runs the `AssetCacheManagerUtil` command and sends the data to influxdb.
+I use the `AssetCacheManagerUtil.rb` script (found [here](https://github.com/nlscott/Scripts/blob/master/macOS%20Content%20Cache/scripts/AssetCacheManagerUtil.rb)), which runs the `AssetCacheManagerUtil` command and sends the data to influxdb.
 
 ![Screen Shot 2022-06-19 at 4.13.33 PM](support/002.png)
 
