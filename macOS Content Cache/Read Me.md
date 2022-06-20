@@ -47,9 +47,7 @@ AssetCacheManagerUtil status
     TotalBytesStoredFromPeers: Zero KB
 ```
 
-https://developer.apple.com/documentation/devicemanagement/contentcachinginformationresponse/statusresponse?changes=latest_minor
-
-This is a good start but you might want to know, what does `TotalBytesReturnedToClients` mean? You can reference all the metrics in Apple's Developer docs. Where we can find that `TotalBytesReturnedToClients` is:
+This is a good start but you might want to know, what does `TotalBytesReturnedToClients` mean? You can reference all the metrics in [Apple's Developer Docs](https://developer.apple.com/documentation/devicemanagement/contentcachinginformationresponse/statusresponse?changes=latest_minor). Where we can find that `TotalBytesReturnedToClients` is:
 
 > The amount of data, in bytes, that the content cache served to client iOS, macOS, and tvOS devices since the `TotalBytesAreSince` date.
 
@@ -93,9 +91,7 @@ AssetCacheManagerUtil status -j &>/dev/null | jq '.result.TotalBytesStoredFromOr
 
 I'll a big fan of Grafana and Influxdb, so it only makes sense for me to send these metrics to Influxdb so I can build a dashboard with Grafana. What's nice about sending it to influxdb is you don't have to convert the bytes, that can be handled directly in Grafana while building the dashboard.
 
-Here' my script, written in ruby. I run the `AssetCacheManagerUtil` command and send the data to influxdb.
-
-
+I use the `AssetCacheManagerUtil.rb` script, which runs the `AssetCacheManagerUtil` command and sends the data to influxdb.
 
 ![Screen Shot 2022-06-19 at 4.13.33 PM](support/002.png)
 
